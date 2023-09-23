@@ -128,6 +128,7 @@ void FrameWork::update_stats() {
          << endl;
     t_now = _t_now;
     cerr << "segment bmr: " << double(byte_miss) / byte_req << endl;
+    cerr << "hit ratio: " << double(obj_req - obj_miss) / obj_req << endl;
     seg_byte_miss.emplace_back(byte_miss);
     seg_byte_req.emplace_back(byte_req);
     seg_object_miss.emplace_back(obj_miss);
