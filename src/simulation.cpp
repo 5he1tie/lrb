@@ -121,7 +121,7 @@ void FrameWork::update_real_time_stats() {
 
 void FrameWork::update_stats() {
     auto _t_now = chrono::system_clock::now();
-    cerr << "\ncycle=" << seq / 4000000.0 << "seq: " << seq << endl
+    cerr << "\ncycle=" << seq / 4000000.0 << " seq: " << seq << endl
          << "cache size: " << webcache->_currentSize << "/" << webcache->_cacheSize
          << " (" << ((double) webcache->_currentSize) / webcache->_cacheSize << ")" << endl
          << "delta t: " << chrono::duration_cast<std::chrono::milliseconds>(_t_now - t_now).count() / 1000.
