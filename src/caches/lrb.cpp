@@ -134,7 +134,7 @@ void LRBCache::update_stat_periodic() {
             //    cerr << "feature overhead: "<<feature_overhead<<endl;
             << "memory_window: " << memory_window << endl
 //            << "percent_beyond: " << percent_beyond << endl
-//            << "feature overhead per entry: " << static_cast<double>(feature_overhead) / key_map.size() << endl
+           << "feature overhead per entry: " << static_cast<double>(feature_overhead) / key_map.size() << endl
 //            //    cerr << "sample overhead: "<<sample_overhead<<endl;
 //            << "sample overhead per entry: " << static_cast<double>(sample_overhead) / key_map.size() << endl
             << "n_training: " << training_data->labels.size() << endl
