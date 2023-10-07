@@ -134,7 +134,7 @@ void LRBCache::update_stat_periodic() {
             //    cerr << "feature overhead: "<<feature_overhead<<endl;
             << "memory_window: " << memory_window << endl
 //            << "percent_beyond: " << percent_beyond << endl
-           << "feature overhead per entry: " << static_cast<double>(feature_overhead) / key_map.size() << endl
+           // << "feature overhead per entry: " << static_cast<double>(feature_overhead) / key_map.size() << endl
 //            //    cerr << "sample overhead: "<<sample_overhead<<endl;
 //            << "sample overhead per entry: " << static_cast<double>(sample_overhead) / key_map.size() << endl
             << "n_training: " << training_data->labels.size() << endl
@@ -454,6 +454,7 @@ pair<uint64_t, uint32_t> LRBCache::rank() {
     double scores[sample_rate];
     system_clock::time_point timeBegin;
     //sample to measure inference time
+    TBegin = chrono::system_clock::now();
     if (!(current_seq % 10000))
         timeBegin = chrono::system_clock::now();
     LGBM_BoosterPredictForCSR(booster,
@@ -474,6 +475,8 @@ pair<uint64_t, uint32_t> LRBCache::rank() {
         inference_time = 0.95 * inference_time +
                          0.05 *
                          chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - timeBegin).count();
+    current_inference_time = chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - TBegin).count();
+    std::cout << current_seq << current_inference_time << std::endl;
 //    for (int i = 0; i < n_sample; ++i)
 //        result[i] -= (t - past_timestamps[i]);
     for (int i = sample_rate - n_new_sample; i < sample_rate; ++i) {
