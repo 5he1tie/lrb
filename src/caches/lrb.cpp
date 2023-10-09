@@ -476,7 +476,7 @@ pair<uint64_t, uint32_t> LRBCache::rank() {
                          0.05 *
                          chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - timeBegin).count();
     double current_inference_time = chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - timeBegin).count();
-    std::cout << "Current_inference=" << current_seq << current_inference_time << std::endl;
+    std::cout << "Current_inference=" << current_seq << " " << current_inference_time << std::endl;
 //    for (int i = 0; i < n_sample; ++i)
 //        result[i] -= (t - past_timestamps[i]);
     for (int i = sample_rate - n_new_sample; i < sample_rate; ++i) {
