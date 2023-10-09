@@ -75,6 +75,7 @@ void LRBCache::train() {
     LGBM_DatasetFree(trainData);
     training_time = 0.95 * training_time +
                     0.05 * chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now() - timeBegin).count();
+    std::cout << "Current_train=" << current_inference_time << std::endl;
 }
 
 void LRBCache::sample() {
@@ -476,7 +477,7 @@ pair<uint64_t, uint32_t> LRBCache::rank() {
                          0.05 *
                          chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - timeBegin).count();
     current_inference_time = chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - TBegin).count();
-    std::cout << current_seq << current_inference_time << std::endl;
+    std::cout << "Current_infereence=" << current_seq << current_inference_time << std::endl;
 //    for (int i = 0; i < n_sample; ++i)
 //        result[i] -= (t - past_timestamps[i]);
     for (int i = sample_rate - n_new_sample; i < sample_rate; ++i) {
