@@ -455,8 +455,7 @@ pair<uint64_t, uint32_t> LRBCache::rank() {
     double scores[sample_rate];
     system_clock::time_point timeBegin;
     //sample to measure inference time
-    if (!(current_seq % 10000))
-        timeBegin = chrono::system_clock::now();
+    timeBegin = chrono::system_clock::now();
     LGBM_BoosterPredictForCSR(booster,
                               static_cast<void *>(indptr),
                               C_API_DTYPE_INT32,
