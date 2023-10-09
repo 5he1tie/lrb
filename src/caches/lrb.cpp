@@ -455,7 +455,6 @@ pair<uint64_t, uint32_t> LRBCache::rank() {
     double scores[sample_rate];
     system_clock::time_point timeBegin;
     //sample to measure inference time
-    double current_inference_time = 0;
     if (!(current_seq % 10000))
         timeBegin = chrono::system_clock::now();
     LGBM_BoosterPredictForCSR(booster,
@@ -476,7 +475,8 @@ pair<uint64_t, uint32_t> LRBCache::rank() {
         inference_time = 0.95 * inference_time +
                          0.05 *
                          chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - timeBegin).count();
-    std::cout << "Current_infereence=" << current_seq << current_inference_time << std::endl;
+    double current_inference_time = chrono::duration_cast<chrono::microseconds>(chrono::system_clock::now() - timeBegin).count();
+    std::cout << "Current_inference=" << current_seq << current_inference_time << std::endl;
 //    for (int i = 0; i < n_sample; ++i)
 //        result[i] -= (t - past_timestamps[i]);
     for (int i = sample_rate - n_new_sample; i < sample_rate; ++i) {
